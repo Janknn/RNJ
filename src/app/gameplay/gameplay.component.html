@@ -1,29 +1,14 @@
-<div class="flex justify-center items-center h-screen">
+<div class="flex flex-col justify-center items-center h-screen">
     <button (click)="showPlayer()" class="p-4 bg-blue-500 text-white rounded">Afficher joueur</button>
-    <div *ngIf="!bonusFinished">
-        <div *ngIf="currentPlayer" class="mt-4">
-            <p>{{ currentPlayer }} fume {{ taffes }} <span *ngIf="taffes > 1">taffes</span><span *ngIf="taffes === 1">taffe</span><span *ngIf="taffes > 1 && currentPlayer === 'Inazuma'"> x2</span></p>
+    <div class="" *ngIf="!bonusFinished">
+        <div *ngIf="currentPlayer">
+            <p *ngIf="currentPlayer !== 'Tout le monde'; else allPlayersTurn">
+                {{ currentPlayer }} fume {{ taffes }} <span *ngIf="taffes > 1">taffes</span><span *ngIf="taffes === 1">taffe</span><span *ngIf="taffes > 1 && currentPlayer === 'Inazuma'"> x2</span>
+            </p>
+            <ng-template #allPlayersTurn>
+                <p>Tout le monde fume, indienne de {{ taffes }} taffes</p>
+            </ng-template>
             <p *ngIf="currentBonus">Bonus: {{ currentBonus }}</p>
-            <div *ngIf="currentBonus === 'Inazuma' && !opponentChosen">
-                <h3>Choisissez un adversaire :</h3>
-                <ng-container *ngFor="let player of players">
-                    <button (click)="chooseOpponent(player)" *ngIf="player !== currentPlayer">{{ player }}</button>
-                </ng-container>
-            </div>
-            <div *ngIf="opponentChosen">
-                <h3>{{ chosenOpponent }} a été choisi comme adversaire. Qui gagne le duel ?</h3>
-                <button (click)="resolveDuel(currentPlayer, chosenOpponent)">{{ currentPlayer }}</button>
-                <button (click)="resolveDuel(chosenOpponent, currentPlayer)">{{ chosenOpponent }}</button>
-            </div>
         </div>
-    </div>
-    <!-- La phrase reste affichée en dehors du bloc conditionnel -->
-    <div *ngIf="bonusFinished && currentPlayer">
-        <ng-container *ngIf="winner === currentPlayer">
-            <p>{{ currentPlayer }} a gagné, il fume {{ taffes }} taffes</p>
-        </ng-container>
-        <ng-container *ngIf="winner !== currentPlayer">
-            <p>{{ chosenOpponent }} a gagné, il fume {{ taffes }} sur le ter de {{ currentPlayer }}</p>
-        </ng-container>
     </div>
 </div>

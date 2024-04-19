@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
  providedIn: 'root'
 })
 export class PlayerService {
- private players: string[] = [];
- private bonuses: string[] = ['Tour au turbo', 'Inazuma']; // Ajout de "Inazuma"
+ private players: string[] = ['jerem','mae','anto','will'];
+ private bonuses: string[] = ['Tour au turbo', 'Inazuma','Quitte ou double','Loto','']; // Ajout de "Inazuma"
 
  setPlayers(players: string[]) {
     this.players = players;
@@ -16,12 +16,20 @@ export class PlayerService {
     return this.players;
  }
 
- generateBonus(): string | null {
-    // Génération d'un bonus aléatoirement, avec une chance de ne rien générer
-    if (Math.random() < 0.5) {
-      return null;
-    }
-    const randomIndex = Math.floor(Math.random() * this.bonuses.length);
-    return this.bonuses[randomIndex];
- }
+ generateBonus(): string[] {
+   const selectedBonuses: string[] = [];
+
+   // Parcourir tous les bonus
+   for (let i = 0; i < this.bonuses.length; i++) {
+       // Générer un nombre aléatoire entre 1 et 5
+       const randomNumber = Math.floor(Math.random() * 5) + 1;
+
+       // Si le nombre aléatoire est 1, ajouter le bonus à la liste des bonus sélectionnés
+       if (randomNumber === 1) {
+           selectedBonuses.push(this.bonuses[i]);
+       }
+   }
+
+   return selectedBonuses;
+   }
 }
