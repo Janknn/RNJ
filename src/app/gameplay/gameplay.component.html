@@ -1,13 +1,9 @@
+// gameplay.component.html
 <div class="flex flex-col justify-center items-center h-screen">
     <button (click)="showPlayer()" class="p-4 bg-blue-500 text-white rounded">Afficher joueur</button>
-    <div class="" *ngIf="!bonusFinished">
-        <div *ngIf="currentPlayer">
-            <p *ngIf="currentPlayer !== 'Tout le monde'; else allPlayersTurn">
-                {{ currentPlayer }} fume {{ taffes }} <span *ngIf="taffes > 1">taffes</span><span *ngIf="taffes === 1">taffe</span><span *ngIf="taffes > 1 && currentPlayer === 'Inazuma'"> x2</span>
-            </p>
-            <ng-template #allPlayersTurn>
-                <p>Tout le monde fume, indienne de {{ taffes }} taffes</p>
-            </ng-template>
+    <div *ngIf="!bonusFinished">
+        <div *ngIf="currentPlayer" class="mt-4">
+            <p>{{ currentPlayer }} fume {{ taffes }} <span *ngIf="taffes > 1">taffes</span>
             <p *ngIf="currentBonus">Bonus: {{ currentBonus }}</p>
         </div>
     </div>
